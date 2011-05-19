@@ -14,7 +14,7 @@
 														// einen Converting-Error zu verhindern
 void fb (void);
 int get_mod (int* modus);
-unit *get_values (unit* article);
+unit *get_values (unit* article, int article_number);
 void print_sum (float sum);
 void file_opening_failed (char string);
 void print_ui (int mod);

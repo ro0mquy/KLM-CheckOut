@@ -59,10 +59,10 @@
 #define STR_END "\n Programm wird beendet!\n "
 
 #define STR_WRONG_INPUT "\n\n Falsche Eingabe!\n\n "				// Eingabenfehler-Korrektur
-#define STR_INPUT_SYNTAX1 "\b \n³  Bitte nur Zahlen eingeben!"
-#define STR_ERASE_SYNTAX1 "\n³                                "
-#define STR_INPUT_SYNTAX2 "\b \n³  Bitte nur Zahlen und Komma eingeben!"
-#define STR_ERASE_SYNTAX2 "\n³                                      "
+#define STR_INPUT_SYNTAX1 "\b \n³  ³Bitte nur Zahlen eingeben!"
+#define STR_ERASE_SYNTAX1 "\n³  ³                              "
+#define STR_INPUT_SYNTAX2 "\b \n³  ³Bitte nur Zahlen und Komma eingeben!"
+#define STR_ERASE_SYNTAX2 "\n³  ³                                    "
 #define STR_INPUT_SYNTAX3 "\n³  Bitte Verk„ufernummer angeben!"
 
 #define STR_HTML_HEADER	"<html>\n"					/* HTML-Ausgabe-Code */\

@@ -25,20 +25,20 @@ int get_mod (int *modus) {					// fragt ab welche Option man benutzen will
 }
 	
 
-unit* get_values (unit* article) {			// Hauptfunktion, die Verkäufennummer und Preis entgegen nimmt
+unit* get_values (unit* article, int article_number) {			// Hauptfunktion, die Verkäufennummer und Preis entgegen nimmt
 	char buffer_1[BUFFER_SIZE];
 	char buffer_2[BUFFER_SIZE];
 	int i = 0, k = 0;
 	
 	//fb ();	// wahrscheinlich nicht so gut
-	printf ("³ ");		// UI
+	printf ("³%02i³ ", article_number);		// UI
 
-	jump_label:							// Sprungmarke :( für das zurückgehen in die erste Schleife
+	jump_label:							// Sprungmarke :'( für das zurückgehen in die erste Schleife
 	
-	for (i; !((buffer_1[i] = _getche ()) == '\r' || buffer_1[i] == '\t') && i < BUFFER_SIZE; ++i) {		// erste Haupt-for-Schleife für
+	for (i; i < BUFFER_SIZE && !((buffer_1[i] = _getche ()) == '\r' || buffer_1[i] == '\t'); ++i) {		// erste Haupt-for-Schleife für
 																										// den Verkäufer, die solange
 		printf (STR_ERASE_SYNTAX1);					// löschen alter Fehlermeldungen					// Zeichen einliest, bis [ENTER],
-		_gotoxy (i + 4, _wherey () - 1);																// [TAB] oder die maximale Anzahl
+		_gotoxy (i + 7, _wherey () - 1);																// [TAB] oder die maximale Anzahl
 																										// an Zeichen eingelesen wurde.
 		if (buffer_1[i] == '\b' && i > 0) {			// löschen der Eingabe bei [Backspace]
 			i -= 2;
@@ -47,7 +47,7 @@ unit* get_values (unit* article) {			// Hauptfunktion, die Verkäufennummer und P
 
 		else if ( !(buffer_1[i] == '\x1B') && !(isdigit (buffer_1[i]))) {
 			printf (STR_INPUT_SYNTAX1);				// Ausgabe einer Fehlermeldung und Dekrementieren von 'i'
-			_gotoxy (i + 3, _wherey () - 1);		// wenn keine Zahl oder [ESC] gedrückt wurde
+			_gotoxy (i + 6, _wherey () - 1);		// wenn keine Zahl oder [ESC] gedrückt wurde
 			--i;
 		}
 	}
@@ -58,7 +58,7 @@ unit* get_values (unit* article) {			// Hauptfunktion, die Verkäufennummer und P
  
 		if ((article->seller_id = atoi (buffer_1)) == 0) {		// Umwandel des Buffers in eine Zahl
 			printf (STR_INPUT_SYNTAX3);
-			_gotoxy (i + 3, _wherey () - 1);					// Fehlermeldung und zurückspringen in die for-Schleife
+			_gotoxy (i + 6, _wherey () - 1);					// Fehlermeldung und zurückspringen in die for-Schleife
 			goto jump_label;									// wenn die Verkäufernummer == '0' ist
 		}
 	}
@@ -79,7 +79,7 @@ unit* get_values (unit* article) {			// Hauptfunktion, die Verkäufennummer und P
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////// Verarbeitung für den Preis
 
-	for (k; !((buffer_2[k] = _getche ()) == '\r' || buffer_2[k] == '\t') && k < BUFFER_SIZE; ++k) {		// zweite Haupt-for-Schleife
+	for (k; k < BUFFER_SIZE && !((buffer_2[k] = _getche ()) == '\r' || buffer_2[k] == '\t'); ++k) {		// zweite Haupt-for-Schleife
 																										// für den Preis, die solange
 		printf (STR_ERASE_SYNTAX2);						// löschen alter Fehlermeldungen				// Zeichen einliest, bis [ENTER],
 		_gotoxy (POSITION_PRICE + 1 + k, _wherey () - 1);												// [TAB] oder die maximale Anzahl
@@ -173,10 +173,10 @@ void print_ui (int mod) {					// gibt verschiedene UI-Elemente aus
 	switch (mod) {
 		case 1:
 			
-			_gotoxy (1, 1);								// ganzes UI mit Rahmen und Mittelstreifen
-			putch ('Ú');
+			_gotoxy (1, 1);									// ganzes UI mit Rahmen und Mittelstreifen
+			printf ("ÚÄÄÂ");
 
-			while (_wherex () != BUFFER_SIZE + 3){
+			while (_wherex () != BUFFER_SIZE + 7){
 				putch ('Ä');
 			}
 			putch ('Â');
@@ -189,9 +189,9 @@ void print_ui (int mod) {					// gibt verschiedene UI-Elemente aus
 
 			for (i = 2; i < 300; ++i) {
 				_gotoxy (1, i);
-				putch ('³');
+				printf ("³  ³");
 
-				_gotoxy (BUFFER_SIZE + 3, i);
+				_gotoxy (BUFFER_SIZE + 7, i);
 				putch ('³');
 
 				_gotoxy (80, i);
@@ -204,9 +204,9 @@ void print_ui (int mod) {					// gibt verschiedene UI-Elemente aus
 
 		case 2:
 
-			putch ('Ã');								// mittlere Trennstrich
+			printf ("ÃÄÄÅ");								// horizontaler Trennstrich
 
-			while (_wherex () != BUFFER_SIZE + 3) {
+			while (_wherex () != BUFFER_SIZE + 7) {
 				putch ('Ä');
 			}
 			putch ('Å');
@@ -221,9 +221,9 @@ void print_ui (int mod) {					// gibt verschiedene UI-Elemente aus
 		case 3:
 
 			_gotoxy (1, _wherey () - 1);					// gibt das Grundgerüst für die Summe eines Kunden aus
-			putch ('Ã');
+			printf ("ÃÍÍÊ");
 
-			while (_wherex () != BUFFER_SIZE + 3) {
+			while (_wherex () != BUFFER_SIZE + 7) {
 				putch ('Í');
 			}
 			putch ('Ê');
@@ -242,9 +242,9 @@ void print_ui (int mod) {					// gibt verschiedene UI-Elemente aus
 				putch ('\n');
 			}
 
-			putch ('Ã');
+			printf ("ÃÍÍË");
 
-			while (_wherex () != BUFFER_SIZE + 3) {
+			while (_wherex () != BUFFER_SIZE + 7) {
 				putch ('Í');
 			}
 			putch ('Ë');
@@ -265,7 +265,7 @@ void print_ui (int mod) {					// gibt verschiedene UI-Elemente aus
 				for (int k = 0; k < 5; ++k) {
 					putch ('³');
 
-					_gotoxy (BUFFER_SIZE + 3, _wherey ());
+					_gotoxy (BUFFER_SIZE + 7, _wherey ());
 					putch ('³');
 
 					_gotoxy (80, _wherey ());

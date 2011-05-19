@@ -62,7 +62,8 @@ int main (int argc, char *argv[]) {
 			unit data;
 			long counter;
 			float sum = 0.0;						// Gesamtsumme eines Käufers
-			data.seller_id = 0;						// reseten der Verkäufernummer
+			int article_number = 1;					// Anzahl der Artikel des Kunden
+			data.seller_id = 0;						// Reset der Verkäufernummer
 
 			print_ui (1);
 
@@ -74,7 +75,7 @@ int main (int argc, char *argv[]) {
 			system ("attrib +h ..\\" STR_COPY_DIR);	// und verstecken diese Verzeichnisses
 
 			do {									// Schleife in der Daten eingelesen und gespeichert werden
-				get_values (&data);
+				get_values (&data, article_number);
 
 				if (data.seller_id == -1) {			// Abbruch bei Doppel-[ESC]
 					continue;
@@ -82,11 +83,13 @@ int main (int argc, char *argv[]) {
 				else if (data.seller_id == 0) {					// Ausgabe der Zwischensumme und erstellen einer Sicherungskopie
 					print_sum (sum);
 					sum = 0.0;
+					article_number = 1;
 					check_file (workfile, modus, counter);
 					copy_file (workfile, modus);
 				}
-				else {											// sdchreiben des aktuellen Artikels in die Datei
+				else {											// schreiben des aktuellen Artikels in die Datei
 					sum += data.price;
+					++article_number;
 
 					write_data (&data, &counter, workfile);
 					print_ui (2);
