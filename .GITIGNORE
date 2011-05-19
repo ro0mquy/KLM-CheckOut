@@ -1,0 +1,24 @@
+# Pelles C Project Files #
+
+*.ppj
+*.ppx
+*.tag
+
+
+# Misc #
+
+Ressources/Grundstruktur*.txt
+Ressources/phips-html*.txt
+
+
+# Data Files #
+
+*.html
+*.klm
+Sicherung/
+
+
+# Output #
+
+Ressources/output/
+*.exe
