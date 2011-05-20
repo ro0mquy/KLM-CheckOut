@@ -31,7 +31,7 @@ unit* get_values (unit* article, int article_number) {			// Hauptfunktion, die V
 	int i = 0, k = 0;
 	
 	//fb ();	// wahrscheinlich nicht so gut
-	printf ("³%02i³ ", article_number);		// UI
+	printf ("³%2i³ ", article_number);		// UI
 
 	jump_label:							// Sprungmarke :'( für das zurückgehen in die erste Schleife
 	
