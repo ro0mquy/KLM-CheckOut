@@ -8,6 +8,7 @@ void fb (void) {							// flush buffer
 	}
 }
 
+
 int get_mod (int *modus) {					// fragt ab welche Option man benutzen will 
 
 	printf (STR_CHOOSE_MOD);
@@ -27,7 +28,7 @@ int get_mod (int *modus) {					// fragt ab welche Option man benutzen will
 
 unit* get_values (unit* article, int article_number) {			// Hauptfunktion, die Verkäufennummer und Preis entgegen nimmt
 	char buffer_1[BUFFER_SIZE];
-	char buffer_2[BUFFER_SIZE];
+	char buffer_2[BUFFER_SIZE-25];
 	int i = 0, k = 0;
 	
 	//fb ();	// wahrscheinlich nicht so gut
@@ -56,9 +57,16 @@ unit* get_values (unit* article, int article_number) {			// Hauptfunktion, die V
 
 	if ( strpbrk (buffer_1, "\x1B") == NULL) {		// Aktionen wenn nicht [ESC] gedrückt wurde
  
-		if ((article->seller_id = atoi (buffer_1)) == 0) {		// Umwandel des Buffers in eine Zahl
+		if ((article->seller_id = atoi (buffer_1)) == 0 || (unsigned)article->seller_id > 999999) {	// Umwandel des Buffers in eine Zahl
 			printf (STR_INPUT_SYNTAX3);
-			_gotoxy (i + 6, _wherey () - 1);					// Fehlermeldung und zurückspringen in die for-Schleife
+			if (i == BUFFER_SIZE) {
+				_gotoxy (i + 5, _wherey () - 1);
+				--i;
+				printf(" \b");
+			}
+			else {
+				_gotoxy (i + 6, _wherey () - 1);				// Fehlermeldung und zurückspringen in die for-Schleife
+			}
 			goto jump_label;									// wenn die Verkäufernummer == '0' ist
 		}
 	}
@@ -79,7 +87,7 @@ unit* get_values (unit* article, int article_number) {			// Hauptfunktion, die V
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////// Verarbeitung für den Preis
 
-	for (k; k < BUFFER_SIZE && !((buffer_2[k] = _getche ()) == '\r' || buffer_2[k] == '\t'); ++k) {		// zweite Haupt-for-Schleife
+	for (k; k < BUFFER_SIZE-26 && !((buffer_2[k] = _getche ()) == '\r' || buffer_2[k] == '\t'); ++k) {		// zweite Haupt-for-Schleife
 																										// für den Preis, die solange
 		printf (STR_ERASE_SYNTAX2);						// löschen alter Fehlermeldungen				// Zeichen einliest, bis [ENTER],
 		_gotoxy (POSITION_PRICE + 1 + k, _wherey () - 1);												// [TAB] oder die maximale Anzahl
@@ -93,8 +101,10 @@ unit* get_values (unit* article, int article_number) {			// Hauptfunktion, die V
 			printf ("\b\b \b");
 			
 			if (k == 0) {
-				_gotoxy (i + 3, _wherey ());			// zurückspringen in die Verkäufer-Schleife
-				goto jump_label;						// wenn das erste Zeichen gelöscht wurde
+				--i;
+				_gotoxy (i + 6, _wherey ());			// zurückspringen in die Verkäufer-Schleife
+				printf (" \b");							// wenn das erste Zeichen gelöscht wurde
+				goto jump_label;
 			}
 
 			else {

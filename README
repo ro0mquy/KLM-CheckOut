@@ -1,0 +1,21 @@
+KLM-CheckOut
+============
+
+KLM-CheckOut ist ein Datenverarbeitungsprogramm, das fuer den Margetshoechheimer Kleidermarkt geschrieben wurde.
+Es erlaubt die Eingabe der Verkaeufernummer und des Preises eines Artikels, die anschliessende Speicherung und Auswertung in Form einer HTML-Datei.
+Die Daten werden in Form von .KLM Dateien gespeichert.
+
+Beim Starten des Programmes muss zuerst ein Modus ausgewäht werden.
+Entweder man entscheidet sich fuer die Dateneingabe als eine bestimmte Kasse ( es darf keine Kassennummer doppelt vorkommen) oder man laesst die vorhandenden Daten auswerten.
+Im Eingabemodus steht in der linke Spalte die Verkaeufernummer und in der rechten Spalte der Preis des Artikels.
+
+Die Eingabe erfolgt ueber die Zahlentasten, als Dezimaltrennzeichen kann Komma oder Punkt benutzt werden.
+Um die Eingabe zu bestaetigen, also in die naechste Spalte zu kommen, kann die TAB- oder RETURN-Tasten benutzt werden.
+Um einen Eingabefehler zu beheben, einfach fuer die entsprechende Verkaeufernummer eine negative Zahl eingeben.
+Die Zwischensumme eines Kunden erhaelt man durch druecken der ESC-Taste anstatt einer Verkaeufernummer und anschliessender Bestaetigung. Wenn man direkt danach nochmals die ESC-Taste drueckt.
+
+Bevor im Auswertungsmodus die HTML-Dateien erzeugt werden, wird vorher nochmals dazu aufgefordert zu bestaetigen welche Dateien nicht vorhanden sind. Diese muessen aus den Ordnern auf den verschiedenen Computern genommen werden und in einen Ordner zusammen mit einer Kopie von KLM-CheckOut getan werden, Diese Kopie muss dann ausgefuehrt werden und der Auswertungsmodus gewaehlt werden. Die HTML-Dateien befinden sich danach im selbigem Ordner.
+
+
+(C) 2010 - 2011 Yannik Zimmermann alias Ro0mquy
+All rights reserved.

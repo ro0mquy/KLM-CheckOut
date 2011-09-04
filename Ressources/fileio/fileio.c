@@ -65,8 +65,8 @@ void write_data (unit *data, long *counter, FILE *file) {		// schreibt Daten in 
 	
 	fseek (file, 0, SEEK_SET);
 
-	if (fread (&temp, sizeof (long), 1, file) == 0 || temp != *counter)
-		error_msg ("write_data / fileio  #2");
+	if (fread (&temp, sizeof (long), 1, file) == 0 || temp != *counter){printf("\n\n %i != %i \n\n", temp, *counter);
+		error_msg ("write_data / fileio  #2");}
 
 
 	++(*counter);
@@ -157,7 +157,7 @@ void print_file (unit *data) {						// erstellt die drei HTML-Ausgabedateien
 	
 
 	if ((file = fopen (STR_FILENAME_UNSORT, "w")) == NULL)		// erstellen der unsortierten Datei
-		error_msg ("print_file/fileio #1");
+		error_msg ("print_file / fileio #1");
 
 	
 	fprintf (file, STR_HTML_HEADER, "Unsortierte Ausgabe",	"				<th><u>Verk&auml;ufernummer</u></th>\n"
@@ -203,7 +203,7 @@ void print_file (unit *data) {						// erstellt die drei HTML-Ausgabedateien
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	if ((file = fopen (STR_FILENAME_SUM, "w")) == NULL)			// erstellen der Datei mit summierten Artikelpreisen
-		error_msg ("print_file/fileio #3");
+		error_msg ("print_file / fileio #3");
 
 	
 	fprintf (file, STR_HTML_HEADER, "Summierte Ausgabe",	"				<th><u>Verk&auml;ufernummer</u></th>\n"
@@ -298,26 +298,31 @@ void check_file (FILE *file, int modus, long counter) {								// überprüft den 
 void restore_file (FILE *target, int modus) {					// Wiederherstellung einer Datei
 																// aus ihrer Sicherungsdatei, im Falle eines Fehlers
 	FILE *source;
-	char buffer;
+	char buffer = 0;
 
-	if ((source = fopen (modus == 1 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_1 :
-						(modus == 2 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_2 :
-						(modus == 3 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_3 :
-						(modus == 4 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_4 :
-						(modus == 5 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_5 :
-									  "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_6)))), "rb")) == NULL) {
-
-		error_msg (" restore_file / fileio");
-	}
+	source = fopen  (modus == 1 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_1 :
+					(modus == 2 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_2 :
+					(modus == 3 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_3 :
+					(modus == 4 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_4 :
+					(modus == 5 ? "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_5 :
+								  "..\\" STR_COPY_DIR "\\" STR_COPY_PRE STR_FILENAME_6)))), "rb");
+	
 	_ftruncate (_fileno (target), 0);							// löscht den aktuellen Inhalt der Zieldatei
-
-	fseek (source, 0, SEEK_SET);
 	fseek (target, 0, SEEK_SET);
-	while (fread (&buffer, 1, 1, source)) {						// liest so lange, bis nicht das Ende der Quelldatei erreicht
-		fwrite (&buffer, 1, 1, target);							// wurde, ein Zeichen aus und schreibt es in die Zieldatei
+
+	if (source != NULL){
+		fseek (source, 0, SEEK_SET);
+		while (fread (&buffer, 1, 1, source)) {						// liest so lange, bis nicht das Ende der Quelldatei erreicht
+		fwrite (&buffer, 1, 1, target);								// wurde, ein Zeichen aus und schreibt es in die Zieldatei
+	}
+		fclose (source);
+	}
+	else {
+		//fwrite (&buffer, sizeof (long), 1, target);
+		printf (STR_CANT_RESTORE);
+		error_msg ("restore_file / fileio");
 	}
 
-	fclose (source);
 }
 
 

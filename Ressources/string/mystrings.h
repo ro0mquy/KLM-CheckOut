@@ -35,6 +35,8 @@
 #define STR_FILE_RESTORED 	"\n\n Die Datei wurde wiederhergestellt!\n"\
 							" Falls dieser Fehler w„hrend der Eingabe auftritt,\n"\
 							" k”nnte der letzte Kunde nicht registriert worden sein!\n\n"
+#define STR_CANT_RESTORE	"\n\n Keine Sicherung vorhanden!!\n"\
+							" Die kaputte Datendatei sollte per Hand gel”scht werden!\n\n"
 
 #define STR_NO_FILES "\n Keine Daten gefunden!\n Daten-Dateien bitte in das gleiche Verzeichniss wie dieses Programm kopieren.\n\n "
 #define STR_OPENING_FAIL "\n Folgende Dateien konnten nicht gefunden werden:\n"
@@ -43,7 +45,7 @@
 #define STR_STOP_PROG "\n\n Das Programm wird abgebrochen!\n "			// bei Datenauswertung
 #define STR_ONLY_J_N "\n\n Nur \'j\' oder \'n\' eingeben!\n\n "
 
-#define STR_CHOOSE_MOD  "\n Bitte Modus ausw„hlen:\n\n"		/* Splash-Screen */\
+#define STR_CHOOSE_MOD  "\n Bitte Modus ausw„hlen:                "/* Splash-Screen */"                     ¸ Yannik Zimmermann \n\n"\
 						" [1]. Kasse\n"\
 						" [2]. Kasse\n"\
 						" [3]. Kasse\n"\
@@ -100,9 +102,9 @@
 					" ֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽֽ\n\n\n"\
 					" Code, Programmstruktur, UI und Idee von:\n"\
 					" ממממממממממממממממממממממממממממממממממממממממ\n"\
-					" Yannik Zimmermann (zimmermannyannik@web.de) alias Ro0mquy (ro0mquy@web.de)\n\n\n"\
-					" Icon- und UI-Design-Beratung von:\n"\
-					" מממממממממממממממממממממממממממממממממ\n"\
+					" Yannik Zimmermann (zimmermannyannik@gmail.com) alias Ro0mquy\n\n\n"\
+					" Icon und UI-Design-Beratung von:\n"\
+					" ממממממממממממממממממממממממממממממממ\n"\
 					" Philipp Stephan (design@psoke.de) alias Ps0ke (http://www.psoke.de)\n\n\n\n"\
 					" ¸ 2010 - 2011 Yannik Zimmermann\n"\
 					" All rights reserved\n "
